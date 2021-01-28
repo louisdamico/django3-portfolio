@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,8 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+
+from .local_settings import SECRET
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-wnir5m=dey#m_q9ajx=(3kmn7ro*+#lb+5c=l38j%#n0qylqw'
+SECRET_KEY = SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -124,3 +127,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+try: 
+    from .local_settings import *
+except ImportError:
+    print("Looks like no local file. You are probably on production")
